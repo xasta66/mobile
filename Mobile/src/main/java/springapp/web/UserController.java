@@ -30,8 +30,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/userDetails.htm")
-	public User getUser(
-		@RequestParam(value = "id", required = true) int id) {
+	public User getUser(@RequestParam(value = "id", required = true) int id) {
 		
 		return this.userManager.getUser(id);
 	}

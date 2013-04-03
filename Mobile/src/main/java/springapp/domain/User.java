@@ -25,6 +25,7 @@ public class User implements Serializable {
 	private String surname_1;
     private String surname_2;
     private String mail;
+	private String password;    
 	
     public Integer getId()
     {
@@ -74,13 +75,23 @@ public class User implements Serializable {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}	
+	
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
     public String toString() {
         StringBuffer buffer = new StringBuffer();
         buffer.append("Code: " + code + ";");
         buffer.append("Name: " + name + ";");
         buffer.append("Surname_1: " + surname_1 + ";");        
         buffer.append("Surname_2: " + surname_2 + ";");
-        buffer.append("Mail: " + mail);
+        buffer.append("Mail: " + mail + ";");
+        buffer.append("Password: " + password);        
         return buffer.toString();
     }
 }

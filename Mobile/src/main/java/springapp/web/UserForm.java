@@ -37,7 +37,7 @@ public class UserForm  {
 	public void initBinder(WebDataBinder dataBinder) {
 
 		dataBinder.setDisallowedFields(new String[] { "id" });
-		dataBinder.setRequiredFields(new String[] { "code", "name" });
+		dataBinder.setRequiredFields(new String[] { "code", "name","surname_1","surname_2","mail","password" });
 		dataBinder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
 /*
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
@@ -47,7 +47,7 @@ public class UserForm  {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	@ModelAttribute("user")
+//	@ModelAttribute("user")
 	public User setUpForm(@RequestParam(value = "id", required = false) Integer id) {
 		if (id == null) {
 			return new User();
@@ -57,8 +57,16 @@ public class UserForm  {
 	}
 
 	@RequestMapping(params = "create", method = RequestMethod.POST)
-	public String create(User User, BindingResult result, SessionStatus status) {
-		return update(User, result, status);
+	public String create(User user, BindingResult result, SessionStatus status) {
+		if (result.hasErrors()) {
+			return "userForm";
+		} else {
+			userManager.newUser(user);
+			status.setComplete();
+			return "redirect:userList.htm";
+		}
+		
+//		return update(user, result, status);
 	}
 
 	@RequestMapping(params = "update", method = RequestMethod.POST)
@@ -74,12 +82,12 @@ public class UserForm  {
 			return "redirect:userList.htm";
 		}
 	}
-
+/*
 	@RequestMapping(params = "delete", method = RequestMethod.POST)
 	public String delete(User user, BindingResult result, SessionStatus status) {
 		userManager.deleteUser(user);
 		status.setComplete();
 		return "redirect:userList.htm";
 	}
-
+*/
 }

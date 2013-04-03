@@ -21,28 +21,21 @@
 				<a class="brand" href="#">Manteniment usuaris Mobile</a>
 			</div>
 		</div>
+		<h3>Detall usuari</h3>
 		<br>
-	<div class="container">
-		<h1>Detall usuari</h1>
-		<br>
-		<table width="260">
-			<tr>
-				<th colspan=2>detall</th>
-			</tr>
-			<tr>
-				<td>Nom</td>
-				<td>${user.name}</td>
-			</tr>
-			<tr>
-				<td>id</td>
-				<td><fmt:formatNumber type="number" value="${user.id}" /></td>
-			</tr>
-			<tr>
-				<td>codi</td>
-				<td>${user.code}</td>
-			</tr>
-		</table>
-		<a href="userList.htm"> &lt;&lt;Tornar</a>
+		<div class="well">
+			<table class="table table-bordered">
+				<tr>
+					<td>Codi: ${user.code}</td>
+					<td>Nom: ${user.name}&ensp;${user.surname_1}&ensp;${user.surname_2}</td>
+				</tr>
+				<tr>
+					<td>mail: ${user.mail}</td>
+					<td>Mot calu: ${user.password}</td>
+				</tr>				
+			</table>
+		</div>
+		<a href="userList.htm" class="btn btn-small btn-primary">Tornar</a>
 	</div>
 </body>
 </html>

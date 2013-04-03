@@ -25,19 +25,27 @@ public class UserController {
 	@ModelAttribute("users")
 	public Collection<User> getUsers() {
 		
-		return  this.userManager.getUsers();
+		return  userManager.getUsers();
 
 	}
 
 	@RequestMapping("/userDetails.htm")
 	public User getUser(@RequestParam(value = "id", required = true) int id) {
 		
-		return this.userManager.getUser(id);
+		return userManager.getUser(id);
 	}
 	
+	@RequestMapping("/deleteUser.htm")
+	public String getDeleteUser(@RequestParam(value = "id", required = true) int id) {
+		
+		userManager.deleteUser(userManager.getUser(id));
+		
+		return "redirect:userList.htm";
+	}
+/*	
     public void setUsertManager(UserManager userManager) {
         this.userManager = userManager;
     }
-		
+*/		
 }
 

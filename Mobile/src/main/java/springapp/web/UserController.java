@@ -25,20 +25,20 @@ public class UserController {
 	@ModelAttribute("users")
 	public Collection<User> getUsers() {
 		
-		return  userManager.getUsers();
+		return  userManager.getUsersList();
 
 	}
 
 	@RequestMapping("/userDetails.htm")
 	public User getUser(@RequestParam(value = "id", required = true) int id) {
 		
-		return userManager.getUser(id);
+		return userManager.getUserById(id);
 	}
 	
 	@RequestMapping("/deleteUser.htm")
 	public String getDeleteUser(@RequestParam(value = "id", required = true) int id) {
 		
-		userManager.deleteUser(userManager.getUser(id));
+		userManager.deleteUserById(id);
 		
 		return "redirect:userList.htm";
 	}

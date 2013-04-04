@@ -7,14 +7,14 @@ import springapp.domain.User;
 
 public interface UserManager extends Serializable{
     
-    public List<User> getUsers();
+    public List<User> getUsersList();
     
-    public User getUser(int id);
+    public User getUserById(int id);
     
     public void updateUser(User user);
     
     public void newUser(User user);
     
-    public void deleteUser(User user);
+    public void deleteUserById(int id);
     
 }

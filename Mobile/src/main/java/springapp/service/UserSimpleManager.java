@@ -11,24 +11,20 @@ public class UserSimpleManager implements UserManager {
 
     private static final long serialVersionUID = 1L;
 
-    @Autowired
+ //   @Autowired
     private UserDao userDao;
-
-    public List<User> getProducts() {
-        return userDao.getUserList();
-    }
-
-	public User getUser(int id) {
-	    return userDao.getUser(id);
-	}
-    
-    public List<User> getUsers() {
-        // return users;
-        return userDao.getUserList();
-    }
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+	public User getUserById(int id) {
+	    return userDao.getUserById(id);
+	}
+    
+    public List<User> getUsersList() {
+        // return users;
+        return userDao.getUsersList();
     }
 
 	public void updateUser(User user) {
@@ -41,8 +37,9 @@ public class UserSimpleManager implements UserManager {
 		
 	}
 
-	public void deleteUser(User user) {
-	     userDao.deleteUser(user);
+	public void deleteUserById(int id) {
+	     userDao.deleteUserById(id);
 		
 	}
+
 }

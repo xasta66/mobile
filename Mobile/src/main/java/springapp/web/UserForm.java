@@ -52,7 +52,7 @@ public class UserForm  {
 		if (id == null) {
 			return new User();
 		} else {
-			return userManager.getUser(id.intValue());
+			return userManager.getUserById(id.intValue());
 		}
 	}
 

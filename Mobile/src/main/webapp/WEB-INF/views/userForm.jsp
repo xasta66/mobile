@@ -72,13 +72,13 @@ body {
 					</div>
 				</div>
 			</div>
-			<a href="userList.htm" class="btn btn-small btn-primary">Tornar</a>
+			<a href="userList.htm" class="btn">Cancel&middot;lar</a>
 			<c:choose>
 				<c:when test="${user.id == null}">
-					<button class="btn btn-small btn-primary" type="submit" name="create">Crear</button>		 
+					<button class="btn btn-primary" type="submit" name="create">Crear</button>		 
 				</c:when>
 				<c:otherwise>
-					<button class="btn btn-small btn-primary" type="submit" name="update">Guardar</button>		 
+					<button class="btn btn-primary" type="submit" name="update">Guardar</button>		 
 				</c:otherwise>
 			</c:choose>			
 			</form:form>

@@ -1,23 +1,16 @@
 package springapp.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
 
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.sql.DataSource;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import springapp.domain.User;
 
 @Repository(value = "userDao")
-public class UserJdbcDao  implements UserDao {
+public class UserJpaDao  implements UserDao {
 
  private EntityManager em = null;
 

@@ -29,7 +29,7 @@ body {
 			</div>		
 		</div>	
 		<br>
-			<a href="userForm.htm" class="btn btn-small btn-primary">Nou usuari</a>						
+			<a href="userForm.htm" class="btn btn-primary">Nou usuari</a>						
 		<p>&ensp;</p>
 		<div class="well">
 			<table class="table table-bordered table-striped">
@@ -145,7 +145,7 @@ body {
 				$('#urlDeleteModal').attr('href', href);
 			}
 		
-			//Passar parametres deleteModal			
+			//Passar parametres mailModal			
 			function mailUserModal(mailAddress) {
 				$('#mailAddressModal').val(mailAddress);
 			}			

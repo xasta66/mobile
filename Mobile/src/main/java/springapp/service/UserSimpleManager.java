@@ -3,6 +3,8 @@ package springapp.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import springapp.domain.Page;
 import springapp.domain.User;
 import springapp.repository.UserDao;
 
@@ -40,6 +42,10 @@ public class UserSimpleManager implements UserManager {
 	public void deleteUserById(int id) {
 	     userDao.deleteUserById(id);
 		
+	}
+
+	public Page<User> getUsersPage( int pageNo,  int pageSize, String search){
+		return userDao.getUsersPage( pageNo,  pageSize, search);
 	}
 
 }

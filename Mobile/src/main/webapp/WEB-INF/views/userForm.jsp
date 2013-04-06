@@ -1,27 +1,26 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
+<!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Form Usuari</title>
+
+<link rel="stylesheet" href="./css/bootstrap.css" />
+<style type="text/css"></style>
+<link rel="stylesheet" href="./css/styleBootstrap.css" />
+<link rel="stylesheet" href="./css/bootstrap-responsive.css" />
 
 <script src="./js/bootstrap.js"></script>
-<link rel="stylesheet" href="./css/bootstrap-responsive.css" />
-<link rel="stylesheet" href="./css/bootstrap.css" />
-
-
-<style>
-body {
-	padding-top: 60px;
-	/* 60px to make the container go all the way to the bottom of the topbar */
-}
-</style>
 
 </head>
 <body>
-		<div class="container">
 			<div class="navbar">
 				<div class="navbar-inner">
 					<a class="brand" href="#">Manteniment usuaris Mobile</a>
 				</div>
 			</div>
+		<div class="container">
 			<c:choose>
 				<c:when test="${user.id == null}">
 					<h3>Nou usuari</h3>		 
@@ -72,7 +71,7 @@ body {
 					</div>
 				</div>
 			</div>
-			<a href="userList.htm" class="btn">Cancel&middot;lar</a>
+			<a href="javascript:history.back()" class="btn">Cancel&middot;lar</a>
 			<c:choose>
 				<c:when test="${user.id == null}">
 					<button class="btn btn-primary" type="submit" name="create">Crear</button>		 

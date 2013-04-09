@@ -38,13 +38,14 @@ public class UserController {
 */
 	
 	@RequestMapping("/userList.htm")
-	public ModelAndView  getUsers(@RequestParam(value = "pageNo", required = false) Integer pageNo,
+	public ModelAndView  getUsers(
+			@RequestParam(value = "pageNo", required = false) Integer pageNo,
 			@RequestParam(value = "search", required = false) String search) {
 
 		//Hardcode for the number of users to show for page
 		int pageSize = 11;
 		
-		// If page number is null or seach is informed, init page to page 1
+		// If page number and search are null or seach, init page to page 1
 		if(pageNo == null && search == null){
 			pageNo = 1;
 			search = "";
@@ -65,7 +66,9 @@ public class UserController {
 	
 	
 	@RequestMapping("/userDetail.htm")
-	public ModelAndView getUser(@RequestParam(value = "id", required = true) int id, @RequestParam(value = "pageNo", required = false) int pageNo) {
+	public ModelAndView getUser(
+			@RequestParam(value = "id", required = true) int id, 
+			@RequestParam(value = "pageNo", required = false) int pageNo) {
 		
         Map<String, Object> model = new HashMap<String, Object>();
         model.put("pageNumber", pageNo);      

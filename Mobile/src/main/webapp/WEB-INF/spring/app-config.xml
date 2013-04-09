@@ -17,6 +17,25 @@
 
        <!-- Scans the classpath of this application for @Components to deploy as beans -->
        <context:component-scan base-package="springapp.web" />
+       
+	    <!-- holding properties for SMTP connectivity /-->
+	    <context:property-placeholder location="classpath:smtp.properties"/>
+    
+		<!-- Config Mail  -->
+	    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	        <property name="host" value="${smtp.host}" />
+	        <property name="port" value="${smtp.port}" />
+	        <property name="username" value="${smtp.username}" />
+	        <property name="password" value="${smtp.password}" />
+	        <property name="javaMailProperties">
+	            <props>
+	                <prop key="mail.transport.protocol">smtp</prop>
+	                <prop key="mail.smtp.auth">true</prop>
+	                <prop key="mail.smtp.starttls.enable">true</prop>
+	            </props>
+	        </property>
+	    </bean>
+
 
        <!-- Configures the @Controller programming model -->
        <mvc:annotation-driven/>

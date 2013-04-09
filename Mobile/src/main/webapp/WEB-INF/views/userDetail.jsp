@@ -1,17 +1,25 @@
 <%@ include file="/WEB-INF/views/include.jsp" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<title>Detall Usuari</title>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
 
-<link rel="stylesheet" href="./css/bootstrap.css" />
- <style></style>
-<link rel="stylesheet" href="./css/styleBootstrap.css" />
-<link rel="stylesheet" href="./css/bootstrap-responsive.css" />
+<!-- Le styles -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/styleBootstrap.css" rel="stylesheet"/>
+<style type="text/css">
 
-<script src="./js/bootstrap.js"></script>
+</style>
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
 </head>
 <body>
@@ -20,22 +28,38 @@
 				<a class="brand" href="#">Manteniment usuaris Mobile</a>
 			</div>
 		</div>
+			
 	<div class="container">
 		<h3>Detall usuari</h3>
 		<br>
-		<div class="well">
-			<table class="table table-bordered">
-				<tr>
-					<td>Codi: ${model.user.code}</td>
-					<td>Nom: ${model.user.name}&ensp;${model.user.surname_1}&ensp;${model.user.surname_2}</td>
-				</tr>
-				<tr>
-					<td>mail: ${model.user.mail}</td>
-					<td>Mot calu: ${model.user.password}</td>
-				</tr>				
-			</table>
+		<table class="table">
+			<tr>
+				<td class="rightCell">Nom:</td>
+				<td>${model.user.name}</td>									
+				<td class="rightCell">Codi:</td>
+				<td>${model.user.code}</td>
+			</tr>
+			<tr>
+				<td class="rightCell">Primer cognom:</td>				
+				<td>${model.user.surname_1}</td>
+				<td class="rightCell">Segon cognom:</td>					
+				<td>${model.user.surname_2}</td>
+			</tr>	
+			<tr>
+				<td class="rightCell">Mail:</td>				
+				<td>${model.user.mail}</td>
+				<td class="rightCell">Mot clau:</td>					
+				<td>${model.user.password}</td>
+			</tr>				
+		</table>
+		<div class="pull-right">
+			<a href="javascript:history.back()" class="btn btn-small btn-primary">Tornar</a>
 		</div>
-		<a href="javascript:history.back()" class="btn btn-small btn-primary">Tornar</a>
+		<br>
+		<footer>
+			<hr>		
+			<p>&copy; 2012</p>
+		</footer>	
 	</div>
 </body>
 </html>

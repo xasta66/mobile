@@ -13,7 +13,6 @@ public class UserSimpleManager implements UserManager {
 
     private static final long serialVersionUID = 1L;
 
- //   @Autowired
     private UserDao userDao;
 
     public void setUserDao(UserDao userDao) {
@@ -23,11 +22,21 @@ public class UserSimpleManager implements UserManager {
 	public User getUserById(int id) {
 	    return userDao.getUserById(id);
 	}
+	
+	public User getUserByCode(String code) {
+	    return userDao.getUserByCode(code);
+	}
     
     public List<User> getUsersList() {
         // return users;
         return userDao.getUsersList();
     }
+    
+	public List<String> getListMailAddresses(String query) {
+
+		 return userDao.getListMailAddresses(query);
+		
+	}    
 
 	public void updateUser(User user) {
 	     userDao.updateUser(user);

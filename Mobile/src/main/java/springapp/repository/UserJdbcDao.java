@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import springapp.domain.Page;
 import springapp.domain.User;
 
+
 public class UserJdbcDao implements UserDao {
 
 @Autowired
@@ -34,6 +35,23 @@ public User getUserById(int id) {
         .queryForObject("select * from users where id = ? ",
             new Object[] { id },
             new UserMapper());
+}
+
+public User getUserByCode(String code) {
+	
+    return jdbcTemplate
+        .queryForObject("select * from users where code = ? ",
+            new Object[] { code },
+            new UserMapper());
+}
+
+public List<String> getListMailAddresses(String query) {
+
+	return (List<String>) jdbcTemplate.queryForList("select concat(name,' ', surname_1,' ' ,surname_2,' <',mail,'>') as nameComp from users where name like '%" + 
+	query + "%' or surname_1 like '%" + query + "%' or surname_2 like '%" + query + "%' group by mail", String.class);
+	
+	
+	
 }
 
 public void updateUser(User user) {

@@ -12,6 +12,7 @@
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/styleBootstrap.css" rel="stylesheet"/>
 <style type="text/css">
+
 </style>
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -178,7 +179,7 @@
 			</div>
 			<!--/row-->
 			<div class="pull-right">
-				<a href="javascript:history.back();" class="btn">Cancel&middot;lar</a>&nbsp;&nbsp;
+				<a href="userList.htm" class="btn">Cancel&middot;lar</a>&nbsp;&nbsp;
 				<c:choose>
 					<c:when test="${user.id == null}">
 						<button class="btn btn-primary" type="submit" name="create">Crear</button>
@@ -208,6 +209,13 @@
 	<script src="js/jquery.validate.js"></script>		
 	<script type="text/javascript">
 	$(document).ready(function () {
+		
+		
+		// on ready add error class to the spring validator errors
+		$("span.errors").filter(function() {
+		     var txt = this.textContent || this.innerText;
+		     return txt != '';
+		}).parent().closest('.control-group').addClass('error');		
 
 	        $("#userFrom").validate({
 			    rules: {
@@ -238,8 +246,7 @@
 						$(element).closest('.control-group').addClass('error');
 					},
 					success: function(element) {
-						element
-						.closest('.control-group').removeClass('error');
+						$(element).closest('.control-group').removeClass('error');
 					},
 	        });	
 	});

@@ -14,12 +14,16 @@
 <style type="text/css">
 
 .content {
+    top: 0;
+    left:0;
   width: 50% ;
-  margin-left: auto ;
-  margin-right: auto ;
-  margin-top: 25% ; 
+  margin-left: 25% ;
+  margin-right: 25% ;
+  margin-top: 35% ; 
+  opacity:1;
+  position:absolute; 
+   z-index:1500 
 }
-
 
 #navNewUser {visibility:hidden;}
 
@@ -67,7 +71,16 @@
 				<a class="brand" href="#">Manteniment usuaris Mobile</a>
 				
 				    <ul class="nav">
-				      <li id="navNewUser"><a href="userForm.htm">Nou usuari</a></li>
+				    
+				    <li id="navNewUser" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men&uacute; <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                           <li><a href="userForm.htm">Nou usuari</a></li>
+                          <li><a href="newMail.htm">Redactar mail</a></li>
+                        </ul>
+                      </li>
+				    
+				     
 				    </ul>
 				
 				<form class="navbar-search pull-right" action="userList.htm"  method="post">
@@ -84,8 +97,7 @@
 	            <ul class="nav nav-list">
 	              <li class="nav-header">MEN&Uacute;</li>
 	              <li class="nav-line"><a href="userForm.htm">Nou usuari</a></li>
-	              <li><a href="#">Link</a></li>
-	              <li><a href="#">Link</a></li>
+	              <li class="nav-line"><a href="newMail.htm">Redactar mail</a></li>
 	              <li><a href="#">Link</a></li>
 	              <li><a href="#">Link</a></li>
 	              <li><a href="#">Link</a></li>
@@ -94,7 +106,7 @@
 	          </div>
 	        </div>
 			<div id="usersTable" class="span9">			
-				<table class="table table-bordered table-striped">
+				<table class="table table-striped">
 					<thead>
 						<tr>
 							<th width="10%">Id</th>
@@ -196,14 +208,14 @@
 				<div class="control-group">
 					<label class="control-label" for="street">Mail</label>
 					<div class="controls">
-						<input name="mailAddressModal" id="mailAddressModal" type="text" >
+						<input name="mailAddress" id="mailAddress" type="text" class="input-xlarge">
 					</div>
 				</div>             
 	
 				<div class="control-group">
 					<label class="control-label" for="street">Assumpte</label>
 					<div class="controls">
-						<input  name="subject" id="subject" type="text" data-required="true">
+						<input  name="subject" id="subject" type="text" class="input-xlarge">
 					</div>
 				</div>             
 
@@ -232,6 +244,7 @@
 		<script src="js/bootstrap-modal.js"></script>
 		<script src="js/bootstrap-transition.js"></script>
 		<script src="js/bootstrap-alert.js"></script>
+		<script src="js/bootstrap-dropdown.js"></script>
 
 		<script type="text/javascript">
 		//events mailModal
@@ -269,15 +282,15 @@
 			
 		//sends parameters to mailModal			
 		function mailUserModal(mailAddress) {			
-			$('#mailAddressModal').val(mailAddress);
+			$('#mailAddress').val(mailAddress);
 		}			
 			
 		// mailForm validate
 		$(document).ready(function () {
 
-			var validator = $("#mailForm").validate({
+			$("#mailForm").validate({
 				    rules: {
-					      mailAddressModal: {
+					      mailAddress: {
 					        required: true,
 					        email: true
 					      },
@@ -294,14 +307,11 @@
 								$(element).closest('.control-group').addClass('error');
 							},
 							success: function(element) {
-								element
-								.closest('.control-group').removeClass('error');
-							},
-					
-							
+								$(element).closest('.control-group').removeClass('error');
+							},							
 						    submitHandler: function(form) {
 						    	sendMail();
-						    }							
+						    },							
 							
 							
 		        });	
@@ -320,8 +330,6 @@
 			    type:"POST",
 			    data:str,
 			    url:"sendEmail.htm",
-//                cache: false,
-//                contentType: "multipart/form-data",
                 success : function(response) { 
                 		
                 	var array = response.split('-')
@@ -336,7 +344,7 @@
 	                    		  function() 
 	                    		  {
 	                      			$('#mailModal').modal('hide');
-	                    		  }, 2000);
+	                    		  }, 1500);
                 	}
 
                 }, 
@@ -356,13 +364,12 @@
                         alert('Unknow Error.\n' + x.responseText);
                     }
                 }
-			});
-			
+			});			
 			
 		}  
 		
 		function progressBar(){
-			 $('#alert_placeholder').html('<div class="inmodal-backdrop"><div class="progress progress-danger progress-striped active content"><div class="bar" style="width:100%;"></div></div></div>'); 
+			 $('#alert_placeholder').html('<div class="inmodal-backdrop"></div><div class="progress progress-danger progress-striped active content"><div  class="bar" style="width:100%;"></div></div>'); 
 		}
 		// Bootstrap alert
 		function alertBS(returnCode, message) {

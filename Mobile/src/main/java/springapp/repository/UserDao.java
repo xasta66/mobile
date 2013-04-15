@@ -11,7 +11,11 @@ public interface UserDao {
     
     public Page<User> getUsersPage(final int pageNo, final int pageSize, String search);
     
-    public User getUserById(int id);    
+    public User getUserById(int id);
+    
+    public List<String> getListMailAddresses(String query);
+    
+    public User getUserByCode(String code);
 
     public void updateUser(User user);
     

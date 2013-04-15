@@ -1,26 +1,19 @@
 package springapp.web;
 
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import springapp.repository.UserDao;
 import springapp.service.UserManager;
-import springapp.service.UserModifyValidator;
+import springapp.service.UserValidator;
 import springapp.domain.User;
 
 @Controller
@@ -30,9 +23,10 @@ public class UserForm  {
 	
    @Autowired
     private UserManager userManager;
+   
+   @Autowired
+   private UserValidator userValidator;
 	
-	private UserModifyValidator userModifyValidator = new UserModifyValidator();
-
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
 
@@ -58,6 +52,10 @@ public class UserForm  {
 
 	@RequestMapping(params = "create", method = RequestMethod.POST)
 	public String create(User user, BindingResult result, SessionStatus status) {
+		
+		
+		userValidator.validate(user, result);
+		
 		if (result.hasErrors()) {
 			return "userForm";
 		} else {
@@ -72,7 +70,9 @@ public class UserForm  {
 	@RequestMapping(params = "update", method = RequestMethod.POST)
 	public String update(User user, BindingResult result, SessionStatus status) {
 
-		userModifyValidator.validate(user, result);
+
+		
+		userValidator.validate(user, result);
 				
 		if (result.hasErrors()) {
 			return "userForm";

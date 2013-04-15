@@ -14,6 +14,10 @@ public interface UserManager extends Serializable{
     
     public User getUserById(int id);
     
+    public List<String> getListMailAddresses(String query);    
+    
+    public User getUserByCode(String code);
+    
     public void updateUser(User user);
     
     public void newUser(User user);

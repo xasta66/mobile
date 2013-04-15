@@ -23,7 +23,7 @@ public class SendEmailController {
         
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody void doSendEmail(HttpServletResponse response,
-    		@RequestParam(value = "mailAddressModal", required = true) String mailAddress,
+    		@RequestParam(value = "mailAddress", required = true) String mailAddress,
     		@RequestParam(value = "subject", required = true) String subject,
     		@RequestParam(value = "message", required = true) String message) throws Exception {
                   
@@ -35,18 +35,16 @@ public class SendEmailController {
 
         response.setCharacterEncoding("UTF-8");  
         response.setContentType("text/html");  
-        
-//        response.getWriter().write("succes"); //Esborrar!!!!!!!!!!!
                          
         try {
 			// sends the e-mail
 			mailSender.send(email);
 			//response= returnCode-message!!!
-	        response.getWriter().write("success-missatge enviat"); 
-		} catch (MailException e) {
-	        response.getWriter().write("error-" + e.getMessage()); 
+	        response.getWriter().write("success-El missatge s'ha enviat"); 
+		} catch (MailException me) {
+	        response.getWriter().write("error-Error enviant el correu:<br> " + me.getMessage()); 
 		} catch (NullPointerException npe){
-			response.getWriter().write("error-servidor de correu no disponible");
+			response.getWriter().write("error-Servidor de correu no disponible");
 		}
 		
 

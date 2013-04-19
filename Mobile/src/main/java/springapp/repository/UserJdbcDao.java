@@ -10,11 +10,12 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import org.springframework.stereotype.Component;
 
 import springapp.domain.Page;
 import springapp.domain.User;
 
-
+@Component
 public class UserJdbcDao implements UserDao {
 
 @Autowired
@@ -45,13 +46,14 @@ public User getUserByCode(String code) {
             new UserMapper());
 }
 
-public List<String> getListMailAddresses(String query) {
+public List<String> getListMailAddresses(String search) {
+	
+	String whereClause = this.whereSearchByName(search);
+	
+	String query = "select concat(name,' ', surname_1,' ' ,surname_2,' <',mail,'>') as nameComp from users " + whereClause + " group by mail";
 
-	return (List<String>) jdbcTemplate.queryForList("select concat(name,' ', surname_1,' ' ,surname_2,' <',mail,'>') as nameComp from users where name like '%" + 
-	query + "%' or surname_1 like '%" + query + "%' or surname_2 like '%" + query + "%' group by mail", String.class);
-	
-	
-	
+	return (List<String>) jdbcTemplate.queryForList(query, String.class);
+
 }
 
 public void updateUser(User user) {
@@ -78,27 +80,7 @@ public void deleteUserById(int id) {
 
 public Page<User> getUsersPage(final int pageNo, final int pageSize, String search) {
 	
-	String whereClause = "";
-	
-	
-	if(search !=null &&  !search.trim().isEmpty()){
-		StringTokenizer tokensSearch = new StringTokenizer(search);
-	    int nWords = tokensSearch.countTokens();
-		
-	    whereClause = " where ";  
-		int count = 0;
-		while(tokensSearch.hasMoreElements()){
-			
-			if(count > 0){
-				whereClause += " or ";	
-			}
-			
-			String word = tokensSearch.nextToken();
-			whereClause += "name like '%" + word + "%'  or surname_1 like '%" + word+ "%' or surname_2 like '%" + word+ "%'";
-			
-			count++;
-		}	
-	}
+	String whereClause = this.whereSearchByName(search);
 		
 	PaginationHelper<User> pagHelper = new PaginationHelper<User>();
 
@@ -113,6 +95,33 @@ public Page<User> getUsersPage(final int pageNo, final int pageSize, String sear
     
 }
 
+public String whereSearchByName(String search){
+	
+	String whereClause = "";
+	
+	if(search !=null &&  !search.trim().isEmpty()){
+		
+		StringTokenizer tokensSearch = new StringTokenizer(search);
+		
+	    whereClause = " where ";  
+		int count = 0;
+		while(tokensSearch.hasMoreElements()){
+			
+			if(count > 0){
+				whereClause += " or ";	
+			}
+			
+			String word = tokensSearch.nextToken();
+			whereClause += "name like '" + word + "%'  or surname_1 like '" + word+ "%' or surname_2 like '" + word+ "%'";
+			
+			count++;
+		}	
+	}
+	
+	return whereClause;
+}
+
+
 private static class UserMapper implements ParameterizedRowMapper<User> {
 
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -126,7 +135,7 @@ private static class UserMapper implements ParameterizedRowMapper<User> {
     		user.setPassword(rs.getString("password"));     		
         return user;
     }
-    }
+}
     
 }
 

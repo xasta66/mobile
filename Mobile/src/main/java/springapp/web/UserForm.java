@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import springapp.service.PasswordGenerator;
 import springapp.service.UserManager;
 import springapp.service.UserValidator;
 import springapp.domain.User;
@@ -44,7 +45,9 @@ public class UserForm  {
 //	@ModelAttribute("user")
 	public User setUpForm(@RequestParam(value = "id", required = false) Integer id) {
 		if (id == null) {
+						
 			return new User();
+			
 		} else {
 			return userManager.getUserById(id.intValue());
 		}

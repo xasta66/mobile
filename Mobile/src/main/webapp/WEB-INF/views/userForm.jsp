@@ -104,10 +104,13 @@
 						<div class="span6">
 							<div class="control-group">
 								<label class="control-label" for="password">Mot clau</label>
-								<div class="controls">
-									<form:input path="password" class="input-block-level" />
-									<form:errors path="password" cssClass="errors" />
-								</div>
+								<div class="controls">									
+									<div class="input-append">
+									  	<form:input path="password" class="input-block-level" />
+									 	<a class="btn" type="submit" onclick="genPwd();">Generar</a>
+									</div>					
+									<form:errors path="password" cssClass="errors" />									
+								</div>								
 							</div>
 						</div>
 						<!--/span-->
@@ -162,7 +165,11 @@
 								<div class="control-group">
 									<label class="control-label" for="country">Country</label>
 									<div class="controls">
-										<select id="country"></select>
+										<select id="country">
+										<option id="0"></option>										
+										<option id="1">Andorra</option>
+										<option id="2">Espanya</option>										
+										</select>
 									</div>
 								</div>
 
@@ -208,8 +215,24 @@
 	<script src="js/jquery-1.9.1.js"></script>	
 	<script src="js/jquery.validate.js"></script>		
 	<script type="text/javascript">
-	$(document).ready(function () {
+	
+	
+	function genPwd(){
 		
+		$.ajax({
+		    type:"GET",
+		    url:"genPwd.htm",
+            success : function(response) { 
+				$("#password").val(response);
+            }
+
+		 });	
+		
+		
+	}
+	
+	
+	$(document).ready(function () {
 		
 		// on ready add error class to the spring validator errors
 		$("span.errors").filter(function() {
@@ -217,38 +240,39 @@
 		     return txt != '';
 		}).parent().closest('.control-group').addClass('error');		
 
-	        $("#userFrom").validate({
-			    rules: {
-				      name: {
-				        required: true
-				      },
-				      code: {
-				      	minlength: 10,
-				      	maxlength: 10,
-				        required: true
-				      },
-				      surname_1: {
-				        required: true
-				      },
-				      surname_2: {
-				        required: true
-				      },
-				      mail: {
-				        required: true,
-				        email: true
-				      },
-				      password: {
-				        minlength: 6,
-				        required: true
-				      }
-				    },
-					highlight: function(element) {
-						$(element).closest('.control-group').addClass('error');
-					},
-					success: function(element) {
-						$(element).closest('.control-group').removeClass('error');
-					},
-	        });	
+        $("#userFrom").validate({
+		    rules: {
+			      name: {
+			        required: true
+			      },
+			      code: {
+			      	minlength: 10,
+			      	maxlength: 10,
+			        required: true
+			      },
+			      surname_1: {
+			        required: true
+			      },
+			      surname_2: {
+			        required: true
+			      },
+			      mail: {
+			        required: true,
+			        email: true
+			      },
+			      password: {
+				    minlength: 8,
+				    maxlength: 8,
+			        required: true
+			      }
+			    },
+				highlight: function(element) {
+					$(element).closest('.control-group').addClass('error');
+				},
+				success: function(element) {
+					$(element).closest('.control-group').removeClass('error');
+				},
+        });	
 	});
 	</script>
 

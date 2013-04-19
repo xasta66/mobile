@@ -25,7 +25,7 @@
    z-index:1500 
 }
 
-#navNewUser {visibility:hidden;}
+#navDropdown {visibility:hidden;}
 
 /* Large desktop */
 @media (min-width: 1200px) { 
@@ -44,7 +44,7 @@
 
 #usersTable {width: 95%;}  
 
-#navNewUser {visibility:visible;}
+#navDropdown {visibility:visible;}
 
 
 }
@@ -72,7 +72,7 @@
 				
 				    <ul class="nav">
 				    
-				    <li id="navNewUser" class="dropdown">
+				    <li id="navDropdown" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men&uacute; <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                            <li><a href="userForm.htm">Nou usuari</a></li>

@@ -53,7 +53,7 @@
 
 
 				<div class="control-group">
-					<label class="control-label" for="street">Mail (auto. compl.)</label>
+					<label class="control-label" for="street">Mail (autocompl.)</label>
 					<div class="controls ui-widget">
 						<input name="mailAddress" id="mailAddress" type="text"  class="input-xlarge">
 					</div>
@@ -87,7 +87,6 @@
 		<script src="js/jquery-1.9.1.js"></script>
 		<script src="js/jquery.validate.js"></script>
 		<script src="js/jquery-ui.js"></script>										
-		<script src="js/bootstrap-transition.js"></script>
 		<script src="js/bootstrap-alert.js"></script>
 
 		<script type="text/javascript">
@@ -153,14 +152,6 @@
                 	var message = array[1];
                 	
                     alertBS(returnCode, message);
-
-                    if(returnCode=="success"){
-	                    setTimeout(
-	                    		  function() 
-	                    		  {
-	                      			$('#mailModal').modal('hide');
-	                    		  }, 1500);
-                	}
 
                 }, 
                 error: function (x, e) {

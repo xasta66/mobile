@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import springapp.domain.Page;
 import springapp.domain.User;
+import springapp.repository.UserJdbcDao;
+import springapp.service.PasswordGenerator;
 import springapp.service.UserManager;
 
 
@@ -26,7 +29,10 @@ public class UserController {
     
    @Autowired
     private UserManager userManager;
-	
+  
+   @Autowired
+   private UserJdbcDao userDao;
+   
 	@RequestMapping("/userList.htm")
 	public ModelAndView  getUsers(
 			@RequestParam(value = "pageNo", required = false) Integer pageNo,
@@ -77,7 +83,7 @@ public class UserController {
 	
 	@RequestMapping("/newMail.htm")	
 	public void newMail() {
-		
+	//.........
 	}
 	
     @RequestMapping(value = "/mailList.htm", 
@@ -85,9 +91,21 @@ public class UserController {
             headers="Accept=*/*")
 	public @ResponseBody List<String> getMailList(@RequestParam("term") String query) {
 
-    	List<String> mail = userManager.getListMailAddresses(query);
-		
-		return mail;
+//    	List<String> mail = userManager.getListMailAddresses(query);
+    	
+    	List<String> mail = userDao.getListMailAddresses(query);
+    	
+    	
+    	return mail;
+	}
+    
+    @RequestMapping(value = "/genPwd.htm", 
+            method = RequestMethod.GET)
+	public @ResponseBody String generatePassword() {
+
+	    PasswordGenerator pg = new PasswordGenerator();
+	   
+    	return pg.generatePassword();
 	}
 		
 	

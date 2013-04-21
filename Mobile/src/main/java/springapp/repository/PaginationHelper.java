@@ -13,7 +13,7 @@ import springapp.domain.Page;
 public class PaginationHelper<E> {
 
     public Page<E> fetchPage(
-            final JdbcTemplate jt,
+            final JdbcTemplate jdbcTemplate,
             final String sqlCountRows,
             final String sqlFetchRows,
             final Object args[],
@@ -22,7 +22,7 @@ public class PaginationHelper<E> {
             final ParameterizedRowMapper<E> rowMapper) {
 
         // determine how many rows are available
-        final int rowCount = jt.queryForInt(sqlCountRows, args);
+        final int rowCount = jdbcTemplate.queryForInt(sqlCountRows, args);
 
         // calculate the number of pages
         int pageCount = rowCount / pageSize;
@@ -37,7 +37,7 @@ public class PaginationHelper<E> {
 
         // fetch a single page of results
         final int startRow = (pageNo - 1) * pageSize;
-        jt.query(
+        jdbcTemplate.query(
                 sqlFetchRows,
                 args,
                 new ResultSetExtractor() {

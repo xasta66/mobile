@@ -105,7 +105,30 @@
 	            </ul>
 	          </div>
 	        </div>
-			<div id="usersTable" class="span9">			
+			<div id="usersTable" class="span9">
+
+<% 
+	String lastName = "";
+%>
+<c:forEach items="${model.users}" var="user">
+			
+			
+	<c:set var="name" value="${user.name}"/>
+	<% 
+	    String name = (String) pageContext.getAttribute("name");
+		name = name.substring(0, 1)	;
+	
+		if(!name.equals(lastName)){
+		    out.println("<h5>" + name + "</h5>"); 
+		}
+		
+		lastName = name;
+	    out.println("<p>" + name+ "</p>"); 
+	%>
+			
+</c:forEach>
+			
+						
 				<table class="table table-striped">
 					<thead>
 						<tr>

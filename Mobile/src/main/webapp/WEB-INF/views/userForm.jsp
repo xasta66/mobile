@@ -59,8 +59,8 @@
 							<div class="control-group">
 								<label class="control-label" for="code">Codi</label>
 								<div class="controls">
-									<form:input path="code" class="input-block-level" />
-									<form:errors path="code" cssClass="errors" />
+									<form:input path="code" class="input-block-level"  />
+									<form:errors path="code" cssClass="error" />
 								</div>
 							</div>
 						</div>
@@ -233,12 +233,14 @@
 	
 	
 	$(document).ready(function () {
-		
+		/*
 		// on ready add error class to the spring validator errors
 		$("span.errors").filter(function() {
 		     var txt = this.textContent || this.innerText;
 		     return txt != '';
 		}).parent().closest('.control-group').addClass('error');		
+		
+		*/
 
         $("#userFrom").validate({
 		    rules: {

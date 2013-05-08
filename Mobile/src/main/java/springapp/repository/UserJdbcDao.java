@@ -86,8 +86,8 @@ public Page<User> getUsersPage(final int pageNo, final int pageSize, String sear
 
     return pagHelper.fetchPage(
             jdbcTemplate,
-            "SELECT count(*) FROM users " + whereClause + " ORDER BY id",
-            "SELECT * FROM users " + whereClause + " ORDER BY id",
+            "SELECT count(*) FROM users " + whereClause ,
+            "SELECT * FROM users " + whereClause + " ORDER BY name",
             new Object[]{},
             pageNo,
             pageSize,

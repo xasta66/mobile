@@ -39,7 +39,7 @@ public class UserController {
 			@RequestParam(value = "search", required = false) String search) {
 
 		//Hardcode for the number of users to show for page
-		int pageSize = 11;
+		int pageSize = 110;
 		
 		// If page number and search are null or seach, init page to page 1
 		if(pageNo == null && search == null){
